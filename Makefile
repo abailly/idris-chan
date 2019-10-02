@@ -4,17 +4,21 @@ AR          ?=ar
 MACHINE         := $(shell $(CC) -dumpmachine)
 ifneq (, $(findstring darwin, $(MACHINE)))
 	OS      :=darwin
+	SHLIB_SUFFIX    :=.dylib
 else ifneq (, $(findstring cygwin, $(MACHINE)))
 	OS      :=windows
+	SHLIB_SUFFIX    :=.dll
 else ifneq (, $(findstring mingw, $(MACHINE)))
 	OS      :=windows
+	SHLIB_SUFFIX    :=.dll
 else ifneq (, $(findstring windows, $(MACHINE)))
 	OS      :=windows
+	SHLIB_SUFFIX    :=.dll
 else
 	OS      :=unix
+	SHLIB_SUFFIX    :=.so
 endif
 
-SHLIB_SUFFIX    :=.so
 
 LIBNAME=idris_queue
 OBJS = $(LIBNAME).o
